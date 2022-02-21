@@ -1,1 +1,10 @@
 
+version : 2.0
+
+jobs:
+  test:
+    docker:
+      - images: cimg/node
+    steps:
+      - checkout
+      - run: node --version
