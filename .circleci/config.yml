@@ -9,7 +9,10 @@ workflows:
 jobs:
   test:
     docker:
-      - image: cimg/node
+      - image: circleci/node:latest
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - run: node --version
