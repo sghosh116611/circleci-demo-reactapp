@@ -15,4 +15,9 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
-      - run: node --version
+      - run: 
+          name: Install Dependencies
+          command: npm Install
+      - run:
+          name: Run tests
+          command: npm run test
