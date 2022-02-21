@@ -1,6 +1,11 @@
 
 version : 2.0
 
+workflows:
+  test:
+    jobs:
+      - test
+
 jobs:
   test:
     docker:
