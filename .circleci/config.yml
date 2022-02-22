@@ -1,36 +1,7 @@
 version: 2.1
-
 orbs:
   node: circleci/node@4.7.0
   heroku: circleci/heroku@1.2.6
-
-workflows:
-  on_commit:
-    jobs:
-      - build_and_test
-      - deploy:
-          requires:
-            - build_and_test 
-          filters:
-            branches:
-              only: master
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"       
-          filters:
-            branches:
-              only:
-                - master
-                - docs-node-js-language-guide
-    jobs:
-      - build_and_test
-      - deploy:
-          requires:
-            - build_and_test
-          filters:
-            branches:
-              only: master 
 
 jobs:
   build_and_test:
@@ -50,7 +21,7 @@ jobs:
           root: ~/project
           paths:
             - .
-  deploy:
+  deploy: 
     docker:
       - image: cimg/node:17.2.0
     steps:
@@ -59,3 +30,27 @@ jobs:
       - heroku/deploy-via-git:
           force: true 
 
+workflows:
+  on_commit:
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test 
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"       
+          filters:
+            branches:
+              only:
+                - master
+                - docs-node-js-language-guide
+    jobs:
+      - build_and_test
+      - deploy:
+          requires:
+            - build_and_test 
+          filters:
+            branches:
+              only: master
