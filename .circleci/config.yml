@@ -48,7 +48,6 @@ workflows:
             branches:
               only:
                 - master
-                - docs-node-js-language-guide
     jobs:
       - build_and_test
       - deploy:
