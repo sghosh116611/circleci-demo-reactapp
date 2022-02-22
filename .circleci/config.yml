@@ -57,6 +57,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project
-      - heroku/deplot-via-git:
+      - heroku/deploy-via-git:
           force: true
           
