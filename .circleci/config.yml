@@ -1,6 +1,7 @@
 version : 2.1
 
 orbs:
+  node: circleci/node@4.7.0
   heroku: circleci/heroku@1.2.6
 
 workflows:
@@ -38,6 +39,8 @@ jobs:
           password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
+      - node/install-packages:
+          pkg-manager: npm
       - run: 
           name: Install Dependencies
           command: npm install --force
